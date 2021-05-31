@@ -7,7 +7,6 @@ const path = require('path');
 const app = express();
 const connect = require('../config/mongoose');
 let cors = require('cors')
-// const cartsRoutes = require('../api/controllers/cart.controller');
 
 
 
@@ -64,7 +63,7 @@ function bootstrap(port) {
         })
 
         const server = app.listen(port, () => {
-            console.log(`.... JFC server started on port ${port} ....`)
+            console.log(`.... e-commerce server started on port ${port} ....`)
 
         })
         resolve(server);

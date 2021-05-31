@@ -13,23 +13,21 @@ router.post('/', async (req, res, next)=> {
     try {
     } catch (err) {
         console.log(">>> err >>>", err);
-        
+        next(err);
     }
 });
 
 router.post('/:id/variants', validate({ params: OBJ_ID_PARAM, body: VARIANT_BODY }), async(req, res, next)=> {
     try {
-        const {id: prodId} = req.params,
-            { attr} = req.body;
+        const { id: prodId } = req.params,
+            { attr } = req.body;
 
         const variantObj = {
             prodId,
             attr,
         }
-        console.log(">>> attr >>>", attr);
 
         const createdVariant = await createVariant(variantObj);
-        console.log(">> createdVariant >>", createdVariant);
 
         res.status(201).json({
             createdVariant,
@@ -40,18 +38,15 @@ router.post('/:id/variants', validate({ params: OBJ_ID_PARAM, body: VARIANT_BODY
  
     } catch (err) {
         console.log(">>> err >>>", err);
-
+        next(err);
     }
 });
 
 router.get('/', validate({ query: PRODUCT_QUERY }), async (req, res, next) => {
     try {
        
-        const { cate, type, waterCom, flavor, size } = req.query; 
-        console.log("... req.query ...", req.query);
-
         const skuList  = await getProducts(req.query); 
-        console.log(">>> skuList >>>", skuList);
+        // console.log(">>> skuList >>>", skuList);
 
         res.status(200).json({
             skuList,
@@ -59,11 +54,7 @@ router.get('/', validate({ query: PRODUCT_QUERY }), async (req, res, next) => {
             success: true,
         });
     } catch (err) {
-        console.log(">>> err >>>", err);
-        res.status(400).json({
-            message: 'Duplicated school Name, Please choose another name!',
-            success: false,
-        });
+        next(err);
     }
 
 

@@ -11,11 +11,7 @@ const port = process.env.PORT;
 
 async function runApp() {
     const app = await bootstrap(port);
-    ////////////////////////////////////
-    /////// TEST SECTION ////
-    ////////////////////////////////////
-    console.log("... TEST SECTION ...");
-
+   
     // const x = await Products.find({});
     // console.log(">>> x >>>", x);
     return app;

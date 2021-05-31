@@ -19,7 +19,7 @@ module.exports = {
                 $lookup:
                    {
                      from: "variants",
-                     let: { productId: '$_id' }, // from main collection
+                     let: { productId: '$_id' },
                      pipeline: [
                         { $match:
                            { $expr:
@@ -123,42 +123,3 @@ module.exports = {
 
 // ]);
 
-
-
-  
-
-// searchByCursor: async ({
-//     model, query = {}, nextValue, limit = 10, sort = { _id: -1 }, propertyName = '_id',
-//   }) => {
-//     let items;
-
-//     limit += 1;
-
-//     if (nextValue) {
-//       query = {
-//         ...query,
-//         [propertyName]: {
-//           $lt: nextValue,
-//         },
-//       };
-//     }
-
-//     items = await model.find(query).sort(sort).limit(limit);
-
-//     let next = null;
-//     const lengthOfItems = items.length;
-
-//     if (items && lengthOfItems > 0) {
-//       if (lengthOfItems === limit) {
-//         next = items[lengthOfItems - 2][propertyName];
-//         items.splice(lengthOfItems - 1, 1);
-//       }
-
-//       items = items.map((item) => item.toJSON());
-//     }
-
-//     return {
-//       data: items || [],
-//       paging: { next },
-//     };
-//   },
